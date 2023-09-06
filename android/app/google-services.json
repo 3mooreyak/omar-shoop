@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "407966156160",
+    "project_id": "asroo-shoop-getx",
+    "storage_bucket": "asroo-shoop-getx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407966156160:android:a652fb17f3a437a686ed65",
+        "android_client_info": {
+          "package_name": "com.example.omar_apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407966156160-fucgo1ieltl9bdv5cg9t198mkrd4qhjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtIjMiKw04if8Ihr2Ctk9NgvzmC_IM_Zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407966156160-fucgo1ieltl9bdv5cg9t198mkrd4qhjp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "407966156160-gmsb5tv86livtqpm5dmv5b7ig5m9kgh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.omarApps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

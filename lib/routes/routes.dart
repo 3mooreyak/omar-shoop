@@ -3,7 +3,9 @@ import 'package:omar_apps/logic/bindings/auth_binding.dart';
 import 'package:omar_apps/view/screens/auth/forgot_password_screen.dart';
 import 'package:omar_apps/view/screens/auth/login_screen.dart';
 import 'package:omar_apps/view/screens/auth/signup_screen.dart';
+import 'package:omar_apps/view/screens/main_screen.dart';
 
+import '../logic/bindings/main_binding.dart';
 import '../view/screens/welcome_screen.dart';
 
 class AppRoutes {
@@ -31,6 +33,10 @@ class AppRoutes {
       page: () => ForgotPsswordScreen(),
       binding: AuthBinding(),
     ),
+    GetPage(
+        name: Routes.mainScreen,
+        page: () => MainScreen(),
+        bindings: [AuthBinding(), MainBinding()]),
   ];
 }
 
@@ -39,4 +45,5 @@ class Routes {
   static const loginScreen = '/loginScreen';
   static const signUpScreen = '/signUpScreen';
   static const forgotPsswordScreen = '/forgotPsswordScreen';
+  static const mainScreen = '/mainScreen';
 }

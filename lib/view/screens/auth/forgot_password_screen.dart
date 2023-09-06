@@ -11,6 +11,8 @@ class ForgotPsswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
 
   final fromKey = GlobalKey<FormState>();
+
+  final controller = Get.find<AuthController>();
   ForgotPsswordScreen({super.key});
 
   @override
@@ -97,7 +99,16 @@ class ForgotPsswordScreen extends StatelessWidget {
                   SizedBox(
                     height: 50,
                   ),
-                  AuthButton(onPressed: () {}, text: 'SEND')
+                  GetBuilder<AuthController>(builder: (_) {
+                    return AuthButton(
+                        onPressed: () {
+                          if (fromKey.currentState!.validate()) {
+                            String email = emailController.text.trim();
+                            controller.resetPassword(email);
+                          }
+                        },
+                        text: 'SEND');
+                  })
                 ],
               ),
             ),
