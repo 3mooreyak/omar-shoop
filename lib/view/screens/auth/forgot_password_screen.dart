@@ -20,12 +20,12 @@ class ForgotPsswordScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+          backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
           centerTitle: true,
           elevation: 0,
           title: Text(
             'Forgot Password',
-            style: TextStyle(color: Get.isDarkMode ? mainColor : pinkClr),
+            style: TextStyle(color: Get.isDarkMode ? pinkClr : mainColor),
           ),
           leading: IconButton(
             onPressed: () {
@@ -33,11 +33,11 @@ class ForgotPsswordScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Get.isDarkMode ? Colors.black : Colors.white,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
             ),
           ),
         ),
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+        backgroundColor: context.theme.backgroundColor,
         body: Form(
           key: fromKey,
           child: SingleChildScrollView(
@@ -53,7 +53,7 @@ class ForgotPsswordScreen extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.close_rounded,
-                        color: Colors.white,
+                        color: Get.isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
                   ),
@@ -64,7 +64,7 @@ class ForgotPsswordScreen extends StatelessWidget {
                     'if you want to recover your account, then please provide your email ID below..',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Get.isDarkMode ? Colors.black : Colors.white),
+                        color: Get.isDarkMode ? Colors.white : Colors.black),
                   ),
                   const SizedBox(
                     height: 50,
@@ -87,12 +87,12 @@ class ForgotPsswordScreen extends StatelessWidget {
                       }
                     },
                     prefixIcon: Get.isDarkMode
-                        ? Image.asset('assets/images/email.png')
-                        : Icon(
+                        ? Icon(
                             Icons.email,
                             color: pinkClr,
                             size: 30,
-                          ),
+                          )
+                        : Image.asset('assets/images/email.png'),
                     suffixIcon: Text(''),
                     hintText: 'Email ',
                   ),

@@ -24,11 +24,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+          backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
           elevation: 0,
         ),
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
                               text: 'LOG',
-                              color: Get.isDarkMode ? mainColor : pinkClr,
+                              color: Get.isDarkMode ? pinkClr : mainColor,
                               underLine: TextDecoration.none),
                           SizedBox(
                             width: 3,
@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               text: 'IN',
                               color:
-                                  Get.isDarkMode ? Colors.black : Colors.white,
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                               underLine: TextDecoration.none)
                         ],
                       ),
@@ -78,12 +78,12 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                         prefixIcon: Get.isDarkMode
-                            ? Image.asset('assets/images/email.png')
-                            : Icon(
+                            ? Icon(
                                 Icons.email,
                                 color: pinkClr,
                                 size: 30,
-                              ),
+                              )
+                            : Image.asset('assets/images/email.png'),
                         suffixIcon: Text(''),
                         hintText: 'Email ',
                       ),
@@ -103,12 +103,12 @@ class LoginScreen extends StatelessWidget {
                               }
                             },
                             prefixIcon: Get.isDarkMode
-                                ? Image.asset('assets/images/lock.png')
-                                : Icon(
+                                ? Icon(
                                     Icons.lock,
                                     color: pinkClr,
                                     size: 30,
-                                  ),
+                                  )
+                                : Image.asset('assets/images/lock.png'),
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   controller.visibility();
@@ -137,8 +137,8 @@ class LoginScreen extends StatelessWidget {
                                 fontWeight: FontWeight.normal,
                                 text: 'Forgot Password?',
                                 color: Get.isDarkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                    ? Colors.white
+                                    : Colors.black,
                                 underLine: TextDecoration.none)),
                       ),
                       SizedBox(
@@ -165,7 +165,7 @@ class LoginScreen extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                           text: 'OR',
-                          color: Get.isDarkMode ? Colors.black : Colors.white,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
                           underLine: TextDecoration.none),
                       SizedBox(
                         height: 20,

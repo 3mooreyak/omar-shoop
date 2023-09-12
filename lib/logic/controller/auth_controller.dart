@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:omar_apps/routes/routes.dart';
 import 'package:omar_apps/view/screens/main_screen.dart';
@@ -11,6 +12,8 @@ class AuthController extends GetxController {
   var displayUserName = '';
   var displayUserPhoto = '';
   var googleSignIn = GoogleSignIn();
+  var isSignedIn = false;
+  final GetStorage authBox = GetStorage();
   FirebaseAuth auth = FirebaseAuth.instance;
   void visibility() {
     isVisibilty = !isVisibilty;
@@ -70,6 +73,8 @@ class AuthController extends GetxController {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => displayUserName = auth.currentUser!.displayName!);
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
 
       update();
       Get.offAllNamed(Routes.mainScreen);
@@ -102,6 +107,8 @@ class AuthController extends GetxController {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       displayUserName = googleUser!.displayName!;
       displayUserPhoto = googleUser.photoUrl!;
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
 
       update();
       Get.offNamed(Routes.mainScreen);
@@ -140,6 +147,23 @@ class AuthController extends GetxController {
           colorText: Colors.white);
     }
   }
-}
 
-void signOutFromApp() {}
+  void signOutFromApp() async {
+    try {
+      await auth.signOut();
+      await googleSignIn.signOut();
+      displayUserName = '';
+      displayUserPhoto = '';
+      isSignedIn = false;
+      authBox.remove('auth');
+
+      update();
+      Get.offNamed(Routes.welcomeScreen);
+    } catch (error) {
+      Get.snackbar('Error!', error.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
+    }
+  }
+}

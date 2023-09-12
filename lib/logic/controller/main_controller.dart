@@ -10,8 +10,15 @@ class MainController extends GetxController {
 
   final tabs = [
     HomeScreen(),
+    CategoryScreen(),
     FavoriteScreen(),
     SettingsScreen(),
-    CategoryScreen(),
+  ].obs;
+
+  final title = [
+    'Asroo Shop',
+    'Categories',
+    'Favorites',
+    'Settinges',
   ].obs;
 }

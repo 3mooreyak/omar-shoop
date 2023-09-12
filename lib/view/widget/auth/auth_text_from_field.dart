@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AuthTextFromField extends StatelessWidget {
   final TextEditingController controller;
@@ -24,6 +25,7 @@ class AuthTextFromField extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: Colors.black,
       keyboardType: TextInputType.text,
+      style: TextStyle(color: Colors.black),
       validator: (value) => validator(value),
       decoration: InputDecoration(
         fillColor: Colors.grey.shade200,
