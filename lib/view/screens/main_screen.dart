@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:omar_apps/logic/controller/main_controller.dart';
+import 'package:omar_apps/routes/routes.dart';
 import 'package:omar_apps/utils/theme.dart';
 
 class MainScreen extends StatelessWidget {
@@ -17,7 +18,9 @@ class MainScreen extends StatelessWidget {
           leading: Container(),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.cardScreen);
+                },
                 icon: Image.asset(
                   'assets/images/shop.png',
                 ))
