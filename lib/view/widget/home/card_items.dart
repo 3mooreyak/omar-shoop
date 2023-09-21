@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:omar_apps/logic/bindings/product_binding.dart';
+import 'package:omar_apps/logic/controller/cart_controller.dart';
 import 'package:omar_apps/logic/controller/product_controller.dart';
+import 'package:omar_apps/model/product_models.dart';
 import 'package:omar_apps/utils/theme.dart';
 import 'package:omar_apps/view/widget/text_utils.dart';
 
@@ -9,6 +11,7 @@ class CardItems extends StatelessWidget {
   CardItems({super.key});
 
   final controller = Get.find<ProductController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class CardItems extends StatelessWidget {
                 price: controller.productList[index].price,
                 rate: controller.productList[index].rating.rate,
                 productId: controller.productList[index].id,
+                productModels: controller.productList[index],
               );
             },
           ),
@@ -43,11 +47,13 @@ class CardItems extends StatelessWidget {
     });
   }
 
-  Widget buildCardItems(
-      {required String image,
-      required double price,
-      required double rate,
-      required int productId}) {
+  Widget buildCardItems({
+    required String image,
+    required double price,
+    required double rate,
+    required int productId,
+    required ProductModels productModels,
+  }) {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Container(
@@ -83,9 +89,11 @@ class CardItems extends StatelessWidget {
                           ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      cartController.AddProductToCart(productModels);
+                    },
                     icon: Icon(
-                      Icons.add,
+                      Icons.shopping_cart,
                       color: Colors.black,
                     ),
                   ),

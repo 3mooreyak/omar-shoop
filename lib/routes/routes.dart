@@ -3,7 +3,7 @@ import 'package:omar_apps/logic/bindings/auth_binding.dart';
 import 'package:omar_apps/view/screens/auth/forgot_password_screen.dart';
 import 'package:omar_apps/view/screens/auth/login_screen.dart';
 import 'package:omar_apps/view/screens/auth/signup_screen.dart';
-import 'package:omar_apps/view/screens/card_screen.dart';
+import 'package:omar_apps/view/screens/cart_screen.dart';
 import 'package:omar_apps/view/screens/main_screen.dart';
 
 import '../logic/bindings/main_binding.dart';
@@ -41,9 +41,12 @@ class AppRoutes {
       ProductBinding(),
     ]),
     GetPage(
-      name: Routes.cardScreen,
-      page: () => CardScreen(),
-      binding: AuthBinding(),
+      name: Routes.cartScreen,
+      page: () => CartScreen(),
+      bindings: [
+        AuthBinding(),
+        ProductBinding(),
+      ],
     ),
   ];
 }
@@ -54,5 +57,5 @@ class Routes {
   static const signUpScreen = '/signUpScreen';
   static const forgotPsswordScreen = '/forgotPsswordScreen';
   static const mainScreen = '/mainScreen';
-  static const cardScreen = '/cardScreen';
+  static const cartScreen = '/cartScreen';
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:omar_apps/logic/controller/cart_controller.dart';
 import 'package:omar_apps/logic/controller/main_controller.dart';
 import 'package:omar_apps/routes/routes.dart';
 import 'package:omar_apps/utils/theme.dart';
+import 'package:badges/badges.dart' as badges;
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   final controller = Get.find<MainController>();
-
+  final cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Obx(() {
@@ -17,13 +19,26 @@ class MainScreen extends StatelessWidget {
           elevation: 0,
           leading: Container(),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Get.toNamed(Routes.cardScreen);
-                },
-                icon: Image.asset(
-                  'assets/images/shop.png',
-                ))
+            Obx(
+              () => badges.Badge(
+                badgeContent: Text(
+                  cartController.quantity().toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                position: badges.BadgePosition.topEnd(top: 0, end: 3),
+                badgeAnimation: badges.BadgeAnimation.slide(
+                  animationDuration: Duration(milliseconds: 300),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Get.toNamed(Routes.cartScreen);
+                  },
+                  icon: Image.asset(
+                    'assets/images/shop.png',
+                  ),
+                ),
+              ),
+            )
           ],
           backgroundColor: Get.isDarkMode ? darkGreyClr : mainColor,
           title: Text(
