@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:omar_apps/logic/controller/auth_controller.dart';
 import 'package:omar_apps/utils/theme.dart';
+import 'package:omar_apps/view/widget/text_utils.dart';
 
 import '../../logic/controller/theme_controller.dart';
+import '../widget/setting/dark_mode_widget.dart';
+import '../widget/setting/language_widget.dart';
+import '../widget/setting/log_out_widget.dart';
+import '../widget/setting/profile_image.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -12,65 +17,41 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        padding: EdgeInsets.all(24),
         children: [
-          TextButton(
-            onPressed: () {
-              ThemeController().changesTheme();
-            },
-            child: Text(
-              'Dark Mode',
-              style: TextStyle(
-                  color: Get.isDarkMode ? Colors.white : Colors.black),
-            ),
+          ProfileImage(),
+          SizedBox(
+            height: 10,
+          ),
+          Divider(
+            color: Get.isDarkMode ? Colors.white : Colors.grey,
+            thickness: 2,
           ),
           SizedBox(
             height: 20,
           ),
-          GetBuilder<AuthController>(
-            builder: (controller) {
-              return TextButton(
-                onPressed: () {
-                  Get.defaultDialog(
-                    title: 'Log Out From App',
-                    titleStyle: TextStyle(
-                        fontSize: 18,
-                        color: Get.isDarkMode ? Colors.black : Colors.white,
-                        fontWeight: FontWeight.bold),
-                    middleText: 'Are You Sure You Need To Log Out',
-                    middleTextStyle: TextStyle(
-                        fontSize: 18,
-                        color: Get.isDarkMode ? Colors.black : Colors.white,
-                        fontWeight: FontWeight.bold),
-                    backgroundColor: Get.isDarkMode ? pinkClr : mainColor,
-                    radius: 10,
-                    textCancel: ' NO ',
-                    cancelTextColor:
-                        Get.isDarkMode ? Colors.white : Colors.black,
-                    textConfirm: ' YES ',
-                    confirmTextColor:
-                        Get.isDarkMode ? Colors.white : Colors.black,
-                    onCancel: () {
-                      Get.back();
-                    },
-                    onConfirm: () {
-                      controller.signOutFromApp();
-                    },
-                    buttonColor: Get.isDarkMode ? Colors.black : Colors.white,
-                  );
-                },
-                child: Text(
-                  'Log Out',
-                  style: TextStyle(
-                      color: Get.isDarkMode ? Colors.white : Colors.black),
-                ),
-              );
-            },
+          TextUtils(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            text: 'GENERAL'.tr,
+            color: Get.isDarkMode ? pinkClr : mainColor,
+            underLine: TextDecoration.none,
           ),
+          SizedBox(
+            height: 20,
+          ),
+          DarkModeWidget(),
+          SizedBox(
+            height: 20,
+          ),
+          LanguageWidget(),
+          SizedBox(
+            height: 20,
+          ),
+          LogOutWidget(),
         ],
-      )),
+      ),
     );
   }
 }

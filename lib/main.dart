@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:omar_apps/language/localazition.dart';
 import 'package:omar_apps/logic/controller/theme_controller.dart';
 import 'package:omar_apps/routes/routes.dart';
+import 'package:omar_apps/utils/my_string.dart';
 import 'package:omar_apps/utils/theme.dart';
 import 'package:omar_apps/view/screens/welcome_screen.dart';
 
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      translations: LocaliztionApp(),
+      fallbackLocale: Locale(ene),
       theme: ThemesApp.light,
       themeMode: ThemeController().themeDataGet,
       darkTheme: ThemesApp.dark,

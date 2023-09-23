@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:omar_apps/logic/controller/setting_controller.dart';
+import 'package:omar_apps/utils/my_string.dart';
+
+import '../../../utils/theme.dart';
+import '../text_utils.dart';
+
+class LanguageWidget extends StatelessWidget {
+  LanguageWidget({super.key});
+  final controller = Get.find<SettingController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<SettingController>(
+      builder: (_) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Material(
+            color: Colors.transparent,
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: languageSettings,
+                  ),
+                  child: Icon(
+                    Icons.language,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                TextUtils(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  text: 'Language'.tr,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                  underLine: TextDecoration.none,
+                ),
+              ],
+            ),
+          ),
+          Container(
+              width: 120,
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13),
+                border: Border.all(
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                  width: 2,
+                ),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  iconSize: 25,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      child: Text(
+                        english,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      value: ene,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        arabic,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      value: ara,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        french,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      value: frf,
+                    ),
+                  ],
+                  value: controller.langLocal,
+                  onChanged: (value) {
+                    controller.changeLanguage(value!);
+                    Get.updateLocale(Locale(value));
+                  },
+                ),
+              )
+              //  DropdownMenuItem(
+              //   child: Text(
+              //     english,
+              //     style: TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
+              ),
+        ],
+      ),
+    );
+  }
+}

@@ -9,12 +9,24 @@ import 'package:omar_apps/view/screens/main_screen.dart';
 class AuthController extends GetxController {
   bool isVisibilty = false;
   bool isCheckBox = false;
-  var displayUserName = '';
-  var displayUserPhoto = '';
+  var displayUserName = ''.obs;
+  var displayUserPhoto = ''.obs;
+  var displayUserEmail = ''.obs;
   var googleSignIn = GoogleSignIn();
   var isSignedIn = false;
+
   final GetStorage authBox = GetStorage();
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? get userProfile => auth.currentUser;
+
+  void onInit() {
+    displayUserName.value =
+        (userProfile != null ? userProfile!.displayName : "")!;
+    displayUserEmail.value = (userProfile != null ? userProfile!.email : "")!;
+
+    super.onInit();
+  }
+
   void visibility() {
     isVisibilty = !isVisibilty;
 
@@ -36,7 +48,7 @@ class AuthController extends GetxController {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUserName = name;
+        displayUserName.value = name;
         auth.currentUser!.updateDisplayName(name);
       });
       update();
@@ -72,7 +84,8 @@ class AuthController extends GetxController {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => displayUserName = auth.currentUser!.displayName!);
+          .then((value) =>
+              displayUserName.value = auth.currentUser!.displayName!);
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
 
@@ -105,8 +118,8 @@ class AuthController extends GetxController {
   void googleSignUpApp() async {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      displayUserName = googleUser!.displayName!;
-      displayUserPhoto = googleUser.photoUrl!;
+      displayUserName.value = googleUser!.displayName!;
+      displayUserPhoto.value = googleUser.photoUrl!;
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
 
@@ -152,8 +165,8 @@ class AuthController extends GetxController {
     try {
       await auth.signOut();
       await googleSignIn.signOut();
-      displayUserName = '';
-      displayUserPhoto = '';
+      displayUserName.value = '';
+      displayUserPhoto.value = '';
       isSignedIn = false;
       authBox.remove('auth');
 
