@@ -51,7 +51,9 @@ class CartTotal extends StatelessWidget {
                       ),
                       elevation: 0,
                       primary: Get.isDarkMode ? pinkClr : mainColor),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.paymentScreen);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

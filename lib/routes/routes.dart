@@ -5,6 +5,7 @@ import 'package:omar_apps/view/screens/auth/login_screen.dart';
 import 'package:omar_apps/view/screens/auth/signup_screen.dart';
 import 'package:omar_apps/view/screens/cart_screen.dart';
 import 'package:omar_apps/view/screens/main_screen.dart';
+import 'package:omar_apps/view/screens/payment_screen.dart';
 
 import '../logic/bindings/main_binding.dart';
 import '../logic/bindings/product_binding.dart';
@@ -48,6 +49,15 @@ class AppRoutes {
         ProductBinding(),
       ],
     ),
+    GetPage(
+      name: Routes.paymentScreen,
+      page: () => PayMentScreen(),
+      bindings: [
+        AuthBinding(),
+        ProductBinding(),
+        MainBinding(),
+      ],
+    ),
   ];
 }
 
@@ -58,4 +68,5 @@ class Routes {
   static const forgotPsswordScreen = '/forgotPsswordScreen';
   static const mainScreen = '/mainScreen';
   static const cartScreen = '/cartScreen';
+  static const paymentScreen = '/paymentScreen';
 }
